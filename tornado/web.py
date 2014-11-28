@@ -1578,10 +1578,9 @@ def addslash(method):
 
 
 class Application(httputil.HTTPServerConnectionDelegate):
-    """A collection of request handlers that make up a web application.
+    """收集所有请求句柄组成web application
 
-    Instances of this class are callable and can be passed directly to
-    HTTPServer to serve the application::
+    这个类的实例可以作为application传递给HTTPServer以供回调::
 
         application = web.Application([
             (r"/", MainPageHandler),
@@ -1590,12 +1589,15 @@ class Application(httputil.HTTPServerConnectionDelegate):
         http_server.listen(8080)
         ioloop.IOLoop.instance().start()
 
-    The constructor for this class takes in a list of `URLSpec` objects
-    or (regexp, request_class) tuples. When we receive requests, we
-    iterate over the list in order and instantiate an instance of the
-    first request class whose regexp matches the request path.
-    The request class can be specified as either a class object or a
-    (fully-qualified) name.
+
+    这个类携带`URLSpec`对象或是(正则表达式,request_class)的列表作为参数.
+    当我们接受到请求的时候会按顺序遍历这个列表,如果哪个请求路径与正则表
+    达式匹配就会优先选取.
+    这个请求可以是一类或是特定的名字.
+
+    每个元组可以包含额外的元素
+    """
+    """A collection of request handlers that make up a web application.
 
     Each tuple can contain additional elements, which correspond to the
     arguments to the `URLSpec` constructor.  (Prior to Tornado 3.2, this
